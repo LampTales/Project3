@@ -1,6 +1,7 @@
-#include "Matrix.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include "Matrix.h"
+#include "innerTools.h"
 
 struct Matrix* createMatrix(int row, int col) {
     if (row <= 0 || col <= 0) {
@@ -18,7 +19,6 @@ struct Matrix* createMatrix(int row, int col) {
     return mpo;
 }
 
-// How can I create the pointer to pass the data correctly?
 struct Matrix* createMatrixWithIni(int row, int col, const float* fpointer) {
     if (row <= 0 || col <= 0 || fpointer == NULL) {
         return NULL;
@@ -47,7 +47,7 @@ void deleteMatrix(struct Matrix* mpointer) {
 }
 
 int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value) {
-    if (mpointer == NULL || rowSpot <= 0 || rowSpot > mpointer->row || colSpot <= 0 || colSpot > mpointer->col) {
+    if (isLegalMatrix(mpointer) == 0 || hasSuchSpot(mpointer, rowSpot, colSpot) == 0) {
         return 0;
     }
     if (mpointer->arr == NULL) {
@@ -57,20 +57,20 @@ int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value) {
         }
         mpointer->arr = fpo;
     }
-    mpointer->arr[(rowSpot - 1) * mpointer->col + colSpot - 1] = value;
+    mpointer->arr[(rowSpot - 1) * (mpointer->col) + colSpot - 1] = value;
     return 1;
 }
 
 float getElement(const struct Matrix* mpointer, int rowSpot, int colSpot) {
-    if (mpointer == NULL || rowSpot <= 0 || rowSpot > mpointer->row || colSpot <= 0 || colSpot > mpointer->col || mpointer->arr == NULL) {
-        // How can I report this?
+    if (isLegalMatrixWithData(mpointer) == 0 || hasSuchSpot(mpointer, rowSpot, colSpot) == 0) {
+        printf("From call of Matrix::getElement : No such element exist, 0 is return!\n");
         return 0;
     }
-    return mpointer->arr[(rowSpot - 1) * mpointer->col + colSpot - 1];
+    return mpointer->arr[(rowSpot - 1) * (mpointer->col) + colSpot - 1];
 }
 
 int reAssignAll(struct Matrix* mpointer, const float* fpointer) {
-    if (fpointer == NULL || mpointer == NULL || mpointer->row <= 0 || mpointer->col <= 0) {
+    if (fpointer == NULL || isLegalMatrix(mpointer) == 0) {
         return 0;
     }
     if (mpointer->arr == NULL) {
@@ -80,13 +80,53 @@ int reAssignAll(struct Matrix* mpointer, const float* fpointer) {
     for (int i = 0; i < (mpointer->row) * (mpointer->col); i++) {
         mpointer->arr[i] = fpointer[i];
     }
-    return 0;
+    return 1;
 }
 
 struct Matrix* copyMatrix(const struct Matrix* mpointer) {
-    if (mpointer == NULL || mpointer->row <= 0 || mpointer->col <= 0 || mpointer->arr == NULL) {
+    if (isLegalMatrixWithData(mpointer) == 0) {
         return NULL;
     }
     struct Matrix* m = createMatrixWithIni(mpointer->row, mpointer->col, mpointer->arr);
     return m;
+}
+
+void printMatrix(const struct Matrix* mpointer) {
+    if (isLegalMatrixWithData(mpointer) == 0) {
+        return;
+    }
+    for (int i = 0; i < (mpointer->row) * (mpointer->col); i++) {
+        printf("%f\t", mpointer->arr[i]);
+        if ((i + 1) % mpointer->col == 0) {
+            printf("\n");
+        }
+    }
+}
+
+float getMinimum(const struct Matrix* mpointer) {
+    if (isLegalMatrixWithData(mpointer) == 0) {
+        printf("From call of Matrix::getMinimum : no elements exist, 0 is return!\n");
+        return 0;
+    }
+    float ans = mpointer->arr[0];
+    for (int i = 1; i < (mpointer->row) * (mpointer->col); i++) {
+        if (mpointer->arr[i] < ans) {
+            ans = mpointer->arr[i];
+        }
+    }
+    return ans;
+}
+
+float getMaximum(const struct Matrix* mpointer) {
+    if (isLegalMatrixWithData(mpointer) == 0) {
+        printf("From call of Matrix::getMinimum : no elements exist, 0 is return!\n");
+        return 0;
+    }
+    float ans = mpointer->arr[0];
+    for (int i = 1; i < (mpointer->row) * (mpointer->col); i++) {
+        if (mpointer->arr[i] > ans) {
+            ans = mpointer->arr[i];
+        }
+    }
+    return ans;
 }

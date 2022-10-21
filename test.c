@@ -6,14 +6,19 @@ int main() {
     float* fp = array;
     struct Matrix* m = createMatrixWithIni(2, 3, fp);
     struct Matrix* n = copyMatrix(m);
+    printMatrix(m);
     // Where is this function?
     // printf("%d\n", _msize(m->arr));
     // struct Matrix* m = createMatrix(2, 3);
     // struct Matrix* m = NULL;
     // printf("%d\n", m->row);
     setElement(m, 2, 2, 2.46);
-    printf("%f\n", getElement(m, 2, 2));
-    // printf("%f\n", n->arr[4]);
+    printMatrix(m);
+    // printf("%f\n", getElement(m, 2, 2));
+    printf("%f\n", m->arr[0]);
+    setElement(n, 1, 3, 752);
+    printMatrix(n);
+    printf("%f\n", getMaximum(n));
     // printf("%f\n", m->arr[5]);
     deleteMatrix(m);
     deleteMatrix(n);
