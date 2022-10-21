@@ -12,8 +12,8 @@ int main() {
     // struct Matrix* m = NULL;
     // printf("%d\n", m->row);
     setElement(m, 2, 2, 2.46);
-    printf("%f\n", m->arr[4]);
-    printf("%f\n", n->arr[4]);
+    printf("%f\n", getElement(m, 2, 2));
+    // printf("%f\n", n->arr[4]);
     // printf("%f\n", m->arr[5]);
     deleteMatrix(m);
     deleteMatrix(n);

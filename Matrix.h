@@ -14,7 +14,7 @@ void deleteMatrix(struct Matrix* mpointer); // done
 
 int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value); // done
 
-float getElement(const struct Matrix* mpointer, int rowSpot, int colSpot);
+float getElement(const struct Matrix* mpointer, int rowSpot, int colSpot); // done?
 
 int reAssignAll(struct Matrix* mpointer, const float* fpointer); // done
 
