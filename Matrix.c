@@ -61,6 +61,14 @@ int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value) {
     return 1;
 }
 
+float getElement(const struct Matrix* mpointer, int rowSpot, int colSpot) {
+    if (mpointer == NULL || rowSpot <= 0 || rowSpot > mpointer->row || colSpot <= 0 || colSpot > mpointer->col || mpointer->arr == NULL) {
+        // How can I report this?
+        return 0;
+    }
+    return mpointer->arr[(rowSpot - 1) * mpointer->col + colSpot - 1];
+}
+
 int reAssignAll(struct Matrix* mpointer, const float* fpointer) {
     if (fpointer == NULL || mpointer == NULL || mpointer->row <= 0 || mpointer->col <= 0) {
         return 0;
@@ -73,4 +81,12 @@ int reAssignAll(struct Matrix* mpointer, const float* fpointer) {
         mpointer->arr[i] = fpointer[i];
     }
     return 0;
+}
+
+struct Matrix* copyMatrix(const struct Matrix* mpointer) {
+    if (mpointer == NULL || mpointer->row <= 0 || mpointer->col <= 0 || mpointer->arr == NULL) {
+        return NULL;
+    }
+    struct Matrix* m = createMatrixWithIni(mpointer->row, mpointer->col, mpointer->arr);
+    return m;
 }
