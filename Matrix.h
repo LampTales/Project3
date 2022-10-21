@@ -30,9 +30,16 @@ float getMinimum(const struct Matrix* mpointer); // done
 
 float getMaximum(const struct Matrix* mpointer); // done
 
-void addScalar(struct Matrix* mpointer, float scalar);
-void minusScalar(struct Matrix* mpointer, float scalar);
-void mulScalar(struct Matrix* mpointer, float scalar);
+// If the function failed to apply the operation, it will return 0, else 1.
+int addScalar(struct Matrix* mpointer, float scalar);
+
+// If the function failed to apply the operation, it will return 0, else 1.
+int minusScalar(struct Matrix* mpointer, float scalar);
+
+// If the function failed to apply the operation, it will return 0, else 1.
+int mulScalar(struct Matrix* mpointer, float scalar);
+
+// If the function failed to apply the operation, it will return NULL.
 struct Matrix* addMatrix(const struct Matrix* mp1, const struct Matrix* mp2);
 struct Matrix* subtractMatrix(const struct Matrix* mp1, const struct Matrix* mp2);
 struct Matrix* multiplyMatrix(const struct Matrix* mp1, const struct Matrix* mp2);
