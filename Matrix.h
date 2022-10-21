@@ -6,14 +6,14 @@ struct Matrix {
     float* arr;
 };
 
-struct Matrix* createMatrix(int row, int col);
+struct Matrix* createMatrix(int row, int col); // done
 
-struct Matrix* createMatrixWithIni(int row, int col, const float* fpointer);
+struct Matrix* createMatrixWithIni(int row, int col, const float* fpointer); // done
 
-void deleteMatrix(struct Matrix* mpointer);
+void deleteMatrix(struct Matrix* mpointer); // done
 
-void setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value);
-void reAssignAll(struct Matrix* mpointer, const float* fpointer);
+int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value); // done
+int reAssignAll(struct Matrix* mpointer, const float* fpointer);
 struct Matrix* copyMatrix(const struct Matrix* mpointer);
 struct Matrix* addMatrix(const struct Matrix* mp1, const struct Matrix* mp2);
 struct Matrix* subtractMatrix(const struct Matrix* mp1, const struct Matrix* mp2);

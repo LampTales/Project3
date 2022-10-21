@@ -20,7 +20,7 @@ struct Matrix* createMatrix(int row, int col) {
 
 // How can I create the pointer to pass the data correctly?
 struct Matrix* createMatrixWithIni(int row, int col, const float* fpointer) {
-    if (row <= 0 || col <= 0 || fpointer != NULL) {
+    if (row <= 0 || col <= 0 || fpointer == NULL) {
         return NULL;
     }
 
@@ -44,4 +44,33 @@ void deleteMatrix(struct Matrix* mpointer) {
     }
     free(mpointer);
     return;
+}
+
+int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value) {
+    if (mpointer == NULL || rowSpot <= 0 || rowSpot > mpointer->row || colSpot <= 0 || colSpot > mpointer->col) {
+        return 0;
+    }
+    if (mpointer->arr == NULL) {
+        float* fpo = (float*)malloc(mpointer->row * mpointer->col * sizeof(float));
+        for (int i = 0; i < (mpointer->row) * (mpointer->col); i++) {
+            fpo[i] = 0;
+        }
+        mpointer->arr = fpo;
+    }
+    mpointer->arr[(rowSpot - 1) * mpointer->col + colSpot - 1] = value;
+    return 1;
+}
+
+int reAssignAll(struct Matrix* mpointer, const float* fpointer) {
+    if (fpointer == NULL || mpointer == NULL || mpointer->row <= 0 || mpointer->col <= 0) {
+        return 0;
+    }
+    if (mpointer->arr == NULL) {
+        float* fpo = (float*)malloc(mpointer->row * mpointer->col * sizeof(float));
+        mpointer->arr = fpo;
+    }
+    for (int i = 0; i < (mpointer->row) * (mpointer->col); i++) {
+        mpointer->arr[i] = fpointer[i];
+    }
+    return 0;
 }
