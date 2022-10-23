@@ -10,21 +10,21 @@ int main() {
     float* fp = array;
     float* fpw = arrayw;
     struct Matrix* m = createMatrixWithIni(2, 3, fp);
-    struct Matrix* w = createMatrixWithIni(2, 3, fpw);
+    struct Matrix* w = createMatrixWithIni(3, 2, fpw);
     struct Matrix* x = createMatrix(2, 2);
     struct Matrix* ans = createMatrix(2, 2);
     printf("ans = \n");
     printMatrix(ans);
     // printError(setElement(m, 7, 8, 0.5));
     // printError(setElement(m, 1, 2, 0.5));
-    printError(addMatrix(m, x, ans));
+    printError(multiplyMatrix(m, x, ans));
 
-    printError(addMatrix(m, w, ans));
+    printError(multiplyMatrix(m, w, ans));
     printf("ans = \n");
     printMatrix(ans);
-    printError(addMatrix(m, ans, ans));
+    printError(multiplyMatrix(m, ans, ans));
     deleteMatrix(&ans);
-    printError(addMatrix(m, w, ans));
+    printError(multiplyMatrix(m, w, ans));
 
     deleteMatrix(&m);
     deleteMatrix(&w);

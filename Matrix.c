@@ -192,6 +192,9 @@ void printError(int errCode) {
         case 10:
             printf("Error from call of Matrix::subtractMatrix: ");
             break;
+        case 11:
+            printf("Error from call of Matrix::multiplyMatrix: ");
+            break;
         default:
             break;
     }

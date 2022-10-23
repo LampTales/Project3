@@ -75,8 +75,10 @@ int addMatrix(const struct Matrix* mp1, const struct Matrix* mp2, struct Matrix*
 // The function can do adjustments to the answer matrix, but you should make sure that it is not wild.
 int subtractMatrix(const struct Matrix* mp1, const struct Matrix* mp2, struct Matrix* answer);
 
-// If the function failed to apply the operation, it will return NULL.
-struct Matrix* multiplyMatrix(const struct Matrix* mp1, const struct Matrix* mp2);
+// Do multiplication to two matrix and put the answer into the thrid matrix.
+// Return error code: 11X, use printError function to output error information on the terminal.
+// The function can do adjustments to the answer matrix, but you should make sure that it is not wild.
+int multiplyMatrix(const struct Matrix* mp1, const struct Matrix* mp2, struct Matrix* answer);
 
 // According to the error code, it can print out the error information.
 void printError(int errCode);
