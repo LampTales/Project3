@@ -26,7 +26,7 @@ void deleteMatrix(struct Matrix** mpp);
 
 // Set the element at the given spot to the given value.
 // Return error code: 0X, use printError function to output error information on the terminal. 
-int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value); // done
+int setElement(struct Matrix* mpointer, int rowSpot, int colSpot, float value);
 
 // Set all the elements as the data in the float pointer.
 // Return error code: 1X, use printError function to output error information on the terminal.
